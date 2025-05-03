@@ -1,37 +1,98 @@
 import React, { useState } from "react";
 import "./Login.css";
 import logo from "../assets/Cloudyfa.png";
-// Iconify React component import
 import { Icon } from "@iconify/react";
+import { Box, Grid, Paper } from "@mui/material";
+
+const features = [
+  {
+    icon: "mdi:palette",
+    title: "Intuitive dashboard",
+    desc: "Organize with color and clarity",
+    color: "#f3e8ff"
+  },
+  {
+    icon: "mdi:flash",
+    title: "Lightning uploads",
+    desc: "Share files in seconds",
+    color: "#fef9c3"
+  },
+  {
+    icon: "mdi:cellphone",
+    title: "Mobile ready",
+    desc: "Access anywhere, anytime",
+    color: "#cffafe"
+  },
+  {
+    icon: "mdi:cloud-upload-outline",
+    title: "5GB free storage",
+    desc: "Plenty of space to start",
+    color: "#ede9fe"
+  }
+];
 
 export default function Login() {
-  const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [lastKey, setLastKey] = useState("");
-
-  function handleSubmit(e) {
-    e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 2000);
-  }
 
   function handleKeyDown(e) {
     setLastKey(e.key.length === 1 ? e.key : "");
   }
 
+  function handleSubmit(e) {
+    e.preventDefault();
+    setSubmitted(true);
+    // Handle form submission logic here
+  }
+
   return (
-    <div className="login-root">
-      <div className="login-promo" style={{ minWidth: 0, flex: "1 1 340px", maxWidth: 480 }}>
+    <div className="login-root" style={{ background: "#111" }}>
+      <div
+        className="login-promo"
+        style={{
+          minWidth: 0,
+          flex: "1 1 340px",
+          maxWidth: 480,
+          color: "#fff"
+        }}
+      >
         <img src={logo} alt="Cloudyfa Logo" className="login-logo animate-pop" />
-        <h1 style={{ marginBottom: "1.1rem" }}>
-          <span style={{ color: "#111", minWidth: "8ch", display: "inline-block" }}>
-            {/* Optional: Add typewriter effect here if you want */}
+        <h1 style={{ marginBottom: "1.1rem", color: "#fff" }}>
+          <span style={{ color: "#fff", minWidth: "8ch", display: "inline-block" }}>
             Welcome to
           </span>{" "}
-          <span className="brand-gradient">Cloudyfa</span>
+          <span className="brand-gradient" style={{ color: "#fff" }}>Cloudyfa</span>
         </h1>
+        {/* Feature boxes */}
+        <Box sx={{ mt: 3, mb: 3 }}>
+          <Grid container spacing={2}>
+            {features.map((f, i) => (
+              <Grid item xs={12} sm={6} key={f.title}>
+                <Paper
+                  elevation={3}
+                  sx={{
+                    p: 2,
+                    bgcolor: "#222", // black box
+                    borderRadius: 2,
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 2,
+                    color: "#fff" // white text
+                  }}
+                >
+                  <Icon icon={f.icon} width={32} height={32} style={{ color: "#fff" }} />
+                  <div>
+                    <div style={{ fontWeight: 600, color: "#fff" }}>{f.title}</div>
+                    <div style={{ fontSize: "0.97em", color: "#e5e7eb" }}>{f.desc}</div>
+                  </div>
+                </Paper>
+              </Grid>
+            ))}
+          </Grid>
+        </Box>
         <div
           style={{
             background: "linear-gradient(90deg, #f0f9ff 60%, #a5b4fc 100%)",
@@ -115,32 +176,75 @@ export default function Login() {
           margin: "0 0 1.2rem 0",
           padding: 0
         }}>
-          <li className="feature-box animate-fade-in">
-            <Icon icon="mdi:palette" style={{ verticalAlign: "middle" }} />
+          <li
+            className="feature-box animate-fade-in"
+            style={{
+              background: "#18181b",
+              color: "#fbbf24",
+              borderRadius: "0.9rem",
+              padding: "0.7rem 1rem",
+              minWidth: 180,
+              boxShadow: "0 2px 8px #0002"
+            }}
+          >
+            <Icon icon="mdi:palette" style={{ verticalAlign: "middle", color: "#fbbf24" }} />
             <span style={{ marginLeft: 6 }}>
-              <b>Intuitive dashboard</b>
-              <div style={{ fontWeight: 400, fontSize: "0.97em" }}>Organize with color and clarity</div>
+              <b style={{ color: "#fbbf24" }}>Intuitive dashboard</b>
+              <div style={{ fontWeight: 400, fontSize: "0.97em", color: "#fde68a" }}>Organize with color and clarity</div>
             </span>
           </li>
-          <li className="feature-box animate-fade-in" style={{ animationDelay: "0.1s" }}>
-            <Icon icon="mdi:flash" style={{ verticalAlign: "middle" }} />
+          <li
+            className="feature-box animate-fade-in"
+            style={{
+              animationDelay: "0.1s",
+              background: "#18181b",
+              color: "#38bdf8",
+              borderRadius: "0.9rem",
+              padding: "0.7rem 1rem",
+              minWidth: 180,
+              boxShadow: "0 2px 8px #0002"
+            }}
+          >
+            <Icon icon="mdi:flash" style={{ verticalAlign: "middle", color: "#38bdf8" }} />
             <span style={{ marginLeft: 6 }}>
-              <b>Lightning uploads</b>
-              <div style={{ fontWeight: 400, fontSize: "0.97em" }}>Share files in seconds</div>
+              <b style={{ color: "#38bdf8" }}>Lightning uploads</b>
+              <div style={{ fontWeight: 400, fontSize: "0.97em", color: "#bae6fd" }}>Share files in seconds</div>
             </span>
           </li>
-          <li className="feature-box animate-fade-in" style={{ animationDelay: "0.2s" }}>
-            <Icon icon="mdi:cellphone" style={{ verticalAlign: "middle" }} />
+          <li
+            className="feature-box animate-fade-in"
+            style={{
+              animationDelay: "0.2s",
+              background: "#18181b",
+              color: "#a78bfa",
+              borderRadius: "0.9rem",
+              padding: "0.7rem 1rem",
+              minWidth: 180,
+              boxShadow: "0 2px 8px #0002"
+            }}
+          >
+            <Icon icon="mdi:cellphone" style={{ verticalAlign: "middle", color: "#a78bfa" }} />
             <span style={{ marginLeft: 6 }}>
-              <b>Mobile ready</b>
-              <div style={{ fontWeight: 400, fontSize: "0.97em" }}>Access anywhere, anytime</div>
+              <b style={{ color: "#a78bfa" }}>Mobile ready</b>
+              <div style={{ fontWeight: 400, fontSize: "0.97em", color: "#ddd6fe" }}>Access anywhere, anytime</div>
             </span>
           </li>
-          <li className="feature-box animate-fade-in" style={{ animationDelay: "0.3s" }}>
-            <Icon icon="mdi:cloud-upload-outline" style={{ verticalAlign: "middle" }} />
+          <li
+            className="feature-box animate-fade-in"
+            style={{
+              animationDelay: "0.3s",
+              background: "#18181b",
+              color: "#34d399",
+              borderRadius: "0.9rem",
+              padding: "0.7rem 1rem",
+              minWidth: 180,
+              boxShadow: "0 2px 8px #0002"
+            }}
+          >
+            <Icon icon="mdi:cloud-upload-outline" style={{ verticalAlign: "middle", color: "#34d399" }} />
             <span style={{ marginLeft: 6 }}>
-              <b>5GB free storage</b>
-              <div style={{ fontWeight: 400, fontSize: "0.97em" }}>Plenty of space to start</div>
+              <b style={{ color: "#34d399" }}>5GB free storage</b>
+              <div style={{ fontWeight: 400, fontSize: "0.97em", color: "#bbf7d0" }}>Plenty of space to start</div>
             </span>
           </li>
         </ul>
@@ -164,15 +268,15 @@ export default function Login() {
           </span>
         </div>
       </div>
-      <div className="login-form-container glass">
+      <div className="login-form-container glass" style={{ background: "#222", color: "#fff" }}>
         <form className="login-form" autoComplete="off" onSubmit={handleSubmit}>
           <h2>
-            <span className="gradient-text">
-              <Icon icon="mdi:login-variant" style={{ verticalAlign: "middle" }} /> Sign in
+            <span className="gradient-text" style={{ color: "#fff" }}>
+              <Icon icon="mdi:login-variant" style={{ verticalAlign: "middle", color: "#fff" }} /> Sign in
             </span>{" "}
             to Cloudyfa
           </h2>
-          <label>
+          <label style={{ color: "#fff" }}>
             Email
             <div style={{ position: "relative" }}>
               <Icon
@@ -195,7 +299,8 @@ export default function Login() {
                 onChange={e => setEmail(e.target.value)}
                 style={{
                   borderColor: email ? "#38bdf8" : undefined,
-                  color: "#111",
+                  color: "#fff",
+                  background: "#111",
                   paddingLeft: 38
                 }}
                 autoComplete="username"
@@ -203,7 +308,7 @@ export default function Login() {
               />
             </div>
           </label>
-          <label>
+          <label style={{ color: "#fff" }}>
             Password
             <div className="password-field" style={{ position: "relative" }}>
               <Icon
@@ -226,7 +331,8 @@ export default function Login() {
                 onChange={e => setPassword(e.target.value)}
                 style={{
                   borderColor: password ? "#a78bfa" : undefined,
-                  color: "#111",
+                  color: "#fff",
+                  background: "#111",
                   paddingLeft: 38
                 }}
                 autoComplete="current-password"
@@ -242,45 +348,46 @@ export default function Login() {
               >
                 <Icon
                   icon={showPassword ? "mdi:eye-off-outline" : "mdi:eye-outline"}
-                  style={{ fontSize: 22, color: "#7c3aed" }}
+                  style={{ fontSize: 22, color: "#fff" }}
                 />
               </button>
             </div>
           </label>
           {lastKey && (
             <div style={{ margin: "0.5rem 0", color: "#3B82F6", fontWeight: 600 }}>
-              Last key pressed: <span style={{ color: "#111" }}>{lastKey}</span>
+              Last key pressed: <span style={{ color: "#fff" }}>{lastKey}</span>
             </div>
           )}
           <button
             type="submit"
             className={`login-btn rainbow-btn${submitted ? " submitted" : ""}`}
             disabled={submitted}
+            style={{ background: "#111", color: "#fff" }}
           >
             {submitted ? (
               <>
-                <Icon icon="mdi:check-circle-outline" style={{ verticalAlign: "middle" }} /> Welcome!
+                <Icon icon="mdi:check-circle-outline" style={{ verticalAlign: "middle", color: "#fff" }} /> Welcome!
               </>
             ) : (
               <>
-                <Icon icon="mdi:login" style={{ verticalAlign: "middle" }} /> Login
+                <Icon icon="mdi:login" style={{ verticalAlign: "middle", color: "#fff" }} /> Login
               </>
             )}
           </button>
-          <div className="login-links">
-            <a href="#">
-              <Icon icon="mdi:help-circle-outline" style={{ verticalAlign: "middle" }} /> Forgot password?
+          <div className="login-links" style={{ color: "#fff" }}>
+            <a href="#" style={{ color: "#fff" }}>
+              <Icon icon="mdi:help-circle-outline" style={{ verticalAlign: "middle", color: "#fff" }} /> Forgot password?
             </a>
             <span>·</span>
-            <a href="#">
-              <Icon icon="mdi:account-plus-outline" style={{ verticalAlign: "middle" }} /> Create an account
+            <a href="#" style={{ color: "#fff" }}>
+              <Icon icon="mdi:account-plus-outline" style={{ verticalAlign: "middle", color: "#fff" }} /> Create an account
             </a>
           </div>
         </form>
-        <footer className="login-footer">
+        <footer className="login-footer" style={{ color: "#fff" }}>
           <small>
-            <span className="footer-gradient">
-              <Icon icon="mdi:cloud-outline" style={{ verticalAlign: "middle" }} /> © 2025 Cloudyfa.
+            <span className="footer-gradient" style={{ color: "#fff" }}>
+              <Icon icon="mdi:cloud-outline" style={{ verticalAlign: "middle", color: "#fff" }} /> © 2025 Cloudyfa.
             </span>{" "}
             All rights reserved.
           </small>
